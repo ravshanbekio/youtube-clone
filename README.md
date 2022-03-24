@@ -1,4 +1,4 @@
-# youtube-clone
+# YouTube-Clone
 
 Clone version of youtube social network! what can this project do? The user can register, post videos, comment on other videos, create playlists and add videos to it.
 
