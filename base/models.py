@@ -29,6 +29,7 @@ class Video(models.Model):
     video_date = models.DateTimeField(auto_now_add=True)
     video_user = models.ForeignKey(User, on_delete=models.CASCADE)
     video_playlist = models.ForeignKey(Playlist, on_delete=models.SET_NULL, null=True, blank=True)
+    video = models.URLField()
 
     def __str__(self):
         return self.video_name
