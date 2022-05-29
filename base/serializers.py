@@ -1,9 +1,14 @@
 from rest_framework.serializers import ModelSerializer
-from .models import User, Playlist, Video, Comment
+from .models import User, Playlist, Video, Comment, Channel
 
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
+        fields = '__all__'
+
+class ChannelSerializer(ModelSerializer):
+    class Meta:
+        model = Channel
         fields = '__all__'
 
 class PlaylistSerializer(ModelSerializer):

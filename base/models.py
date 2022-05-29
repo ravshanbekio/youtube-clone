@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class User(models.Model):
     name = models.CharField(max_length=150)
@@ -13,8 +14,24 @@ class User(models.Model):
     def __str__(self):
         return self.name
 
+class Channel(models.Model):
+    creator = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=120)
+    username = models.CharField(max_length=120,blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    main_image = models.URLField(blank=True, null=True)
+    banner = models.URLField(blank=True, null=True)
+    recommended_channels = models.ManyToManyField(settings.CHANNEL, blank=True)
+    views = models.PositiveIntegerField(default=1)
+    country = models.CharField(max_length=150, blank=True, null=True)
+
+    def __str__(self):
+        return f"Channel name: {self.name}"
+
+
 class Playlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    # channel = models.OneToOneField(Channel, on_delete=models.CASCADE)
     playlist_name = models.CharField(max_length=110)
     playlist_text = models.TextField(max_length=300)
     playlist_date = models.DateTimeField(auto_now_add=True)
@@ -30,6 +47,7 @@ class Video(models.Model):
     video_user = models.ForeignKey(User, on_delete=models.CASCADE)
     video_playlist = models.ForeignKey(Playlist, on_delete=models.SET_NULL, null=True, blank=True)
     video = models.URLField()
+    video_channel = models.OneToOneField(Channel, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.video_name

@@ -1,7 +1,7 @@
 from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
-from .serializers import PlaylistSerializer, UserSerializer, VideoSerializer, CommentSerializer
-from .models import User, Playlist, Video, Comment
+from .serializers import PlaylistSerializer, UserSerializer, VideoSerializer, CommentSerializer, ChannelSerializer
+from .models import User, Playlist, Video, Comment, Channel
 from rest_framework.response import Response
 from rest_framework import filters
 from rest_framework.generics import get_object_or_404
@@ -25,6 +25,10 @@ class UserViewSet(ModelViewSet):
         return Response(serializer.data)
     filter_backends = [filters.SearchFilter,]
     search_fields = ['id','name','age','country','city','username',]
+
+class ChannelViewSet(ModelViewSet):
+    queryset = Channel.objects.all()
+    serializer_class = ChannelSerializer
 
 class PlaylistViewSet(ModelViewSet):
     queryset = Playlist.objects.all()
