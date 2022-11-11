@@ -6,8 +6,10 @@ Clone version of youtube social network! what can this project do? The user can 
 
 # Installation
 
+```packages
 1. Install django
 
 2. Install djangorestframework
 
 3. Install drf_yasg
+```
