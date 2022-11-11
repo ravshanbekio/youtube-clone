@@ -5,10 +5,14 @@ from .models import User, Playlist, Video, Comment, Channel
 from rest_framework.response import Response
 from rest_framework import filters
 from rest_framework.generics import get_object_or_404
+from rest_framework.throttling import ScopedRateThrottle
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'base'
 
     @action(detail=True, methods=["GET"])
     def playlists(self, request, pk):
@@ -30,9 +34,15 @@ class ChannelViewSet(ModelViewSet):
     queryset = Channel.objects.all()
     serializer_class = ChannelSerializer
 
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'base'
+
 class PlaylistViewSet(ModelViewSet):
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
+
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'base'
 
     @action(detail=True, methods=["GET"])
     def videos(self, request, pk):
@@ -46,6 +56,9 @@ class PlaylistViewSet(ModelViewSet):
 class VideoViewSet(ModelViewSet):
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
+
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'base'
 
     @action(detail=True, methods=["GET"])
     def comments(self, request, pk):
@@ -67,3 +80,6 @@ class VideoViewSet(ModelViewSet):
 class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'base'

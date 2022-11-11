@@ -127,3 +127,9 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CHANNEL = 'base.Channel'
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES':{
+        'base':'15/minute'
+    }
+}
